@@ -90,6 +90,8 @@ azure-dev: container-build cert/sign.pub
 azure-dev-upload:
 	./bin/make-azure-ami --resource-group garden-linux --storage-account-name gardenlinuxdev --image-path=$(BUILDDIR)/azure-gardener_dev-amd64-$(VERSION)-local/rootfs.vhd --image-name=$(AZURE_DEV_IMAGE_NAME)
 
+otc: container-build cert/sign.pub
+	./build.sh $(BUILD_OPTS) --skip-build --features server,cloud,gardener,otc $(BUILDDIR) $(VERSION)
 
 OPENSTACK_IMAGE_NAME=$(IMAGE_BASENAME)-openstack-$(VERSION)
 openstack: container-build cert/sign.pub
